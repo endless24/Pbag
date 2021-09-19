@@ -16,6 +16,10 @@ use App\Http\Controllers\PageController;
 |
 */
 
+Route::post('/login', [PageController::class, 'login'])->name('login');
+Route::post('/register', [PageController::class, 'register'])->name('register');
+Route::post('/delete_token', [PageController::class, 'delete_token'])->name('delete_token');
+
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 
@@ -28,6 +32,6 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 //     ]);
 // });
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->name('dashboard');

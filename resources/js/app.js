@@ -7,11 +7,11 @@ import { InertiaProgress } from '@inertiajs/progress';
 // Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faHome, faKey, faLock, faPhone, faRegistered, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 
-library.add( faHome)
+library.add( faHome, faSignInAlt, faRegistered, faUser, faKey, faEnvelope, faPhone, faLock)
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'PolyBag';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
