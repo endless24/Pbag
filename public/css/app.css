@@ -1634,6 +1634,10 @@ select {
 	--tw-gradient-from: #d1d5db;
 	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(209, 213, 219, 0));
 }
+.from-yellow-600 {
+	--tw-gradient-from: #d97706;
+	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(217, 119, 6, 0));
+}
 .to-gray-700 {
 	--tw-gradient-to: #374151;
 }
