@@ -3,7 +3,7 @@
         <Head :title="title" />
 
         <!-- NAVE BAR -->
-        <div class=" h-screen w-60  bg-gradient-to-b from-yellow-600 to-gray-700  fixed left-0 top-0  py-3">
+        <div class=" h-screen w-60  bg-gradient-to-b from-blue-700 to-gray-700  fixed left-0 top-0  py-3">
             <div class="container max-w-7xl mx-auto">
                 <!-- <button @click="deleteToken()" class=" w-16 h-10 bg-gray-600 text-gray-50">
                     Logout

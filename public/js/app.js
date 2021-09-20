@@ -32470,7 +32470,7 @@ __webpack_require__.r(__webpack_exports__);
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-5663af57");
 
 var _hoisted_1 = {
-  "class": "h-screen w-60 bg-gradient-to-b from-yellow-600 to-gray-700 fixed left-0 top-0 py-3"
+  "class": "h-screen w-60 bg-gradient-to-b from-blue-700 to-gray-700 fixed left-0 top-0 py-3"
 };
 var _hoisted_2 = {
   "class": "container max-w-7xl mx-auto"

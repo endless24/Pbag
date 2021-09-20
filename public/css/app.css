@@ -1638,6 +1638,14 @@ select {
 	--tw-gradient-from: #d97706;
 	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(217, 119, 6, 0));
 }
+.from-blue-900 {
+	--tw-gradient-from: #1e3a8a;
+	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(30, 58, 138, 0));
+}
+.from-blue-700 {
+	--tw-gradient-from: #1d4ed8;
+	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(29, 78, 216, 0));
+}
 .to-gray-700 {
 	--tw-gradient-to: #374151;
 }
