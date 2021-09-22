@@ -16,6 +16,15 @@ class PageController extends Controller
         return Inertia::render('Home');
     }
 
+    public function dashboard(){
+        return Inertia::render('Dashboard');
+    }
+
+    public function add_post()
+    {
+        return Inertia::render('AddPost');
+    }
+
     public function login(LoginRequest $request)
     {
         $request->validate([

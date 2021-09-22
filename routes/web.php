@@ -32,6 +32,13 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 //     ]);
 // });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
+    Route::get('/add-post', [PageController::class, 'add_post'])->name('add_post');
+    // Route::get('/manage-post', [PageController::class, 'view_category'])->name('categories');
+});
+
