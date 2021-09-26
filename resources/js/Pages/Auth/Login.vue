@@ -6,16 +6,16 @@
                     <label for="email" :class="labels">
                         <font-awesome :icon="['fas', 'envelope']" /> Email Address
                     </label>
-                    <input type="text" id="email" :class="inputs" v-model="email">
+                    <input type="text" id="email" :class="inputs" v-model="form.email">
                 </div>
                 <div :class="form_group">
                     <label for="password" :class="labels">
                         <font-awesome :icon="['fas', 'key']" /> Password
                     </label>
-                    <input type="password" id="password" :class="inputs" v-model="password">
+                    <input type="password" id="password" :class="inputs" v-model="form.password">
                 </div>
                 <div :class="form_group">
-                    <input type="checkbox" id="remember" v-model="remember">
+                    <input type="checkbox" id="remember" v-model="form.remember">
                     <label for="remember" :class="labels" class="font-normal"> Remember Me </label>
                 </div>
                 <div :class="form_group">
@@ -48,9 +48,11 @@ export default {
             inputs:'w-full h-8 rounded px-3 block',
             labels:'mb-1 font-bold',
             btns: 'px-4 py-1 rounded',
+            form: this.$inertia.form({
             email : '',
             password : '',
             remember: false,
+            }),
             errors:{
                 email:[],
                 password:[]
@@ -58,28 +60,43 @@ export default {
         }
     },
     methods: {
-        loginUser(){
-            let formData = {
-                email: this.email,
-                password: this.password,
-                remember: this.remember == true ? 'on':''
-            }
-            axios.post(route('login'), formData)
-            .then(res => {
-                if(res.data.status == 'success'){
-                    localStorage.token = res.data.result.apitoken;
-                    this.$inertia.visit(route('dashboard'));
-                }else{
-                    alert('An Error occured!')
-                }
-            })
-            .catch(err => {
-                if (err.response) {
-                    this.errors = err.response.data.errors
-                } else {
-                    console.log('Network Error');
-                }
-            })
+            loginUser(){
+            axios.get('/sanctum/csrf-cookie') //Set thr session cookies for CSRF-Token
+            .then(() => {
+                this.form.transform(data => ({
+                        ... data,
+                        remember: this.form.remember ? 'on' : ''
+                    }))
+                    .post(route('login'), {
+                        onFinish : () => {
+                            this.form.reset('email', 'password');
+                        }
+                    })
+            });
+
+        // loginUser(){
+        //     let formData = {
+        //         email: this.email,
+        //         password: this.password,
+        //         remember: this.remember == true ? 'on':''
+        //     }
+        //     axios.post(route('login'), formData)
+        //     .then(res => {
+        //         if(res.data.status == 'success'){
+        //             localStorage.token = res.data.result.apitoken;
+        //             this.$inertia.visit(route('dashboard'));
+        //         }else{
+        //             alert('An Error occured!')
+        //         }
+        //     })
+        //     .catch(err => {
+        //         if (err.response) {
+        //             this.errors = err.response.data.errors
+        //         } else {
+        //             console.log('Network Error');
+        //         }
+        //     })
+        
         }
     }
 }

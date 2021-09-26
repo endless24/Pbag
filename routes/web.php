@@ -16,12 +16,10 @@ use App\Http\Controllers\PageController;
 |
 */
 
-Route::post('/login', [PageController::class, 'login'])->name('login');
-Route::post('/register', [PageController::class, 'register'])->name('register');
-Route::post('/delete_token', [PageController::class, 'delete_token'])->name('delete_token');
+// Route::post('/login', [PageController::class, 'login'])->name('login');
+// Route::post('/register', [PageController::class, 'register'])->name('register');
+// Route::post('/delete_token', [PageController::class, 'delete_token'])->name('delete_token');
 
-
-Route::get('/', [PageController::class, 'index'])->name('home');
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
@@ -36,9 +34,14 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 //     return Inertia::render('Dashboard');
 // })->name('dashboard');
 
+
+Route::get('/', [PageController::class, 'index'])->name('home');
+Route::get('/aboutus', [PageController::class, 'aboutus'])->name('about');
+Route::get('/contactus', [PageController::class, 'contactus'])->name('contact');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
     Route::get('/add-post', [PageController::class, 'add_post'])->name('add_post');
+    Route::get('/add-category', [PageController::class, 'add_category'])->name('add_category');
     // Route::get('/manage-post', [PageController::class, 'view_category'])->name('categories');
 });
 
