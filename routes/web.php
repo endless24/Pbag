@@ -37,7 +37,7 @@ use App\Http\Controllers\PageController;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/aboutus', [PageController::class, 'aboutus'])->name('about');
-Route::get('/contactus', [PageController::class, 'contactus'])->name('contact');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
     Route::get('/add-post', [PageController::class, 'add_post'])->name('add_post');

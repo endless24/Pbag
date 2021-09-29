@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faBars, faBell, faEnvelope, faHome, faInfo, faKey, faLayerGroup, faLock, faPen, faPhone, faPlus, faPowerOff, faRegistered, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
-library.add( faHome, faSignInAlt, faRegistered, faUser, faKey, faEnvelope, faPhone, faLock, faPowerOff, faPen, faBell, faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo)
+library.add( faHome, faSignInAlt, faRegistered, faUser, faKey, faEnvelope, faPhone, faLock, faPowerOff, faPen, faBell, faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo,)
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'PolyBag';
 
