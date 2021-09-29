@@ -20,7 +20,7 @@ class PageController extends Controller
         return Inertia::render('About');
     }
 
-    public function contactus(){
+    public function contact(){
         return Inertia::render('Contact');
     }
 

@@ -38,8 +38,8 @@
                             <h1 class="text-white text-4xl font-bold mb-4">Need Prayer? We’ll Pray For You!</h1>
                             <h1 class="text-white text-sm">Need prayer? We would love to pray for you. You can send us a message for prayer.</h1>
                         </div>
-                        <div class="col-span-1 py-14 px-4 text-center">
-                            <button class="con-btn uppercase bg-yellow-600 text-white font-semibold px-16 py-8 border-2 border-gray-50 hover:border-yellow-600 hover:bg-yellow-600 hover:text-gray-50 hover:transition duration-500">
+                        <div class="col-span-1 py-14 text-center ">
+                            <button class="con-btn uppercase bg-yellow-600 rounded text-white tracking-widest font-semibold px-14 py-6 border-2 border-gray-50 hover:border-yellow-600 hover:bg-yellow-600 hover:text-gray-50 hover:transition duration-500">
                                 send us a message
                             </button>
                         </div>

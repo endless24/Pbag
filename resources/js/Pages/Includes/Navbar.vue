@@ -1,10 +1,14 @@
 <template>
+<<<<<<< HEAD
     <div class=" bg-gray-900 bg-opacity-80 py-8 fixed top-0 w-full z-50">
+=======
+    <div class=" bg-gray-900  py-2 sticky top-0 w-full z-50">
+>>>>>>> 44ea2786dfad88ab1888862cdb6545bd09c1468f
         <div class="container max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class=" col-span-1 text-3xl text-center">
-                    <span class=" px-2 py-3 rounded-full cursor-pointer">
-                        <span class=" bg-yellow-600 text-white px-3 py-3 text-2xl rounded-full font-semibold hword"  id="hword1">
+                    <span class=" px-2 py-2 rounded-full cursor-pointer">
+                        <span class=" bg-yellow-600 text-white px-3 py-2 text-xl rounded-full font-semibold hword"  id="hword1">
                             <i>GTC</i>
                         </span>
                         <i class=" text-yellow-600" ></i>
