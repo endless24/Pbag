@@ -8,27 +8,37 @@
 
 
    
-        <div class="w-full">
-            <div class="max-w-6xl mx-auto rounded">
+        <div class="">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 rounded">
+                <h1 class="text-3xl text-yellow-600"><font-awesome :icon="['far', 'edit']" /> Create Product</h1>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="md:col-span-2 ">
                         <form name="frmPost" @submit.prevent="addPost()">
-                            <div class="items-center gap-4 shadow-lg rounded-lg my-4 border px-5">
+                            <div class="items-center gap-4 shadow-md rounded-lg my-4 border-l-4 border-yellow-600 px-5">
                                 <div class="mb-3">
-                                    <label for="" class="capitalize block">Post Title</label>
-                                    <input type="text" :class="inputClass" v-model="post.title">
+                                    <label for="" class="capitalize block">Product Name</label>
+                                    <input type="text" :class="inputClass" id="inputshadow" v-model="post.title">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="capitalize block">Product Category</label>
+                                    <select :class="inputClass" id="inputshadow" v-model="post.category_id">
+                                        <option value="" selected disabled>Select Product Category</option>
+                                        <option v-for="(cat, i) in categories" :key="i" :value="cat.id"> {{ cat.category }} </option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="capitalize block">Add Image</label>
-                                    <input type="text" :class="inputClass" v-model="post.image">
+                                    <input type="file" name="picture" :class="inputClass" @change="onFileChange">
+                                    <!-- <input type="text" :class="inputClass" v-model="post.image"> -->
                                 </div>
                                 <div class="mb-3">
-                                    <label for="" class="capitalize block">Post Content</label>
-                                    <textarea :class="inputClass" v-model="post.content"></textarea>
+                                    <label for="" class="capitalize block">Product Detail</label>
+                                    <textarea :class="inputClass" class=" h-32 resize-none" id="inputshadow" v-model="post.content"></textarea>
                                 </div>
                                 <div>
                                     <button :class="addBtn">
-                                        Add
+                                        Add 
+                                        <font-awesome :icon="['fas', 'plus']" />
                                     </button>
                                 </div>
                             </div>
@@ -38,21 +48,21 @@
                     <div>
                         
                         <!-- Recent post -->
-                        <div>
-                            <div class="w-full bg-blue-900 rounded-lg shadow-lg border">
-                                <div class="w-11/12 h-10 text-gray-50 font-bold text-lg flex items-center mx-auto capitalize">
+                        <div class="border-l-4 border-gray-600 rounded-lg">
+                            <div class="w-full rounded-lg">
+                                <div class="w-11/12 h-10 text-yellow-600 font-bold text-lg flex items-center mx-auto capitalize">
                                     <p>recent post</p>
                                 </div>
                             </div>
-                            <div class="h-20 rounded-xl border grid grid-cols-4 gap-4 my-4 p-2 shadow-lg" v-for="(post, i) in posts" :key="i" :value="post.id">
+                            <div class="h-20 rounded-xl border grid grid-cols-4 gap-4 my-4 p-2 shadow-md" v-for="(post, i) in posts" :key="i" :value="post.id">
                                 <div class="col-span-1 overflow-hidden bg-gray-500 rounded-lg">
                                     
                                 </div>
-                                <div class="col-span-3 text-gray-800 flex justify-between items-center w-full h-full">
+                                <div class="col-span-3  text-gray-800 flex justify-between items-center w-full h-full">
                                     <div>
                                         <p class="text-lg capitalize font-bold">{{ post.title }}</p>
                                         <div class="flex">
-                                            <p>{{ post.content }} </p> 
+                                            <!-- <p>{{ post.content }} </p>  -->
                                             <p class="text-sm ml-2 font-bold text-opacity-20 cursor-pointer">Read more ...</p>
                                         </div>
                                     </div>
@@ -82,12 +92,13 @@ export default {
     components: { AppLayout },
     data(){
         return {
-            inputClass:'border-blue-600 border-opacity-20 border-2 rounded outline-none focus:outline-none ring-1',
-            addBtn: 'px-3 bg-gray-900 text-white rounded shadow-md hover:bg-blue-900',
+            inputClass:'border-blue-600 border-opacity-20 border-0 bg-gray-200 rounded h-12 lg:w-96 w-64',
+            addBtn: 'px-2 py-2 mb-4 bg-gray-700 text-white rounded shadow-md hover:bg-blue-900',
 
             post: {
                 title: '',
-                image: '',
+                category_id: '',
+                // image: '',
                 content: '',
             }, 
             posts: [],
@@ -135,15 +146,44 @@ export default {
             }else{
                 alert('Post is safe')
             }
+        },
+
+        addCategory(){
+            axios.post(route('api.store.category'), { cat: this.category})
+            .then((res) => {
+                if (res.data.status == 'success') {
+                    alert(res.data.msg)
+                    this.category = '';
+                    this.fetchCategory();
+                } else {
+                    alert(res.data.msg)
+                }
+            })
+            .catch((ex) => {
+                console.log(ex);
+            })
+        },
+        fetchCategory(){
+            axios.post(route('api.fetch.category'))
+            .then((res) => {
+                this.categories = res.data
+            })
+            .catch((ex) => {
+                console.log(ex);
+            })
         }
 
     },
     mounted(){
         this.fetchPost();
+        this.fetchCategory();
+
     }
 }
 </script>
 
 <style>
-
+#inputshadow{
+    box-shadow: 2.0px 4.0px 4.0px hsl(0deg 10% 10% / 0.34);
+}
 </style>

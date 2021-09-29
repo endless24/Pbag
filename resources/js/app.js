@@ -7,9 +7,10 @@ import { InertiaProgress } from '@inertiajs/progress';
 // Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faBell, faEnvelope, faHome, faKey, faLock, faPen, faPhone, faPowerOff, faRegistered, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faBell, faEnvelope, faHome, faInfo, faKey, faLayerGroup, faLock, faPen, faPhone, faPlus, faPowerOff, faRegistered, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
-library.add( faHome, faSignInAlt, faRegistered, faUser, faKey, faEnvelope, faPhone, faLock, faPowerOff, faPen, faBell)
+library.add( faHome, faSignInAlt, faRegistered, faUser, faKey, faEnvelope, faPhone, faLock, faPowerOff, faPen, faBell, faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo)
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'PolyBag';
 

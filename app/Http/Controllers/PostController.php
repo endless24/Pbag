@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Contact;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -62,6 +63,7 @@ class PostController extends Controller
     {
         $add = new Post;
         $add->category_id = $request->post['category_id'];
+        // $add->img = $request->post['img'];
         $add->title = $request->post['title'];
         $add->content = $request->post['content'];
         if ($add->save()) {
@@ -125,4 +127,5 @@ class PostController extends Controller
         $contact = Contact::all();
         return json_encode($contact);
     }
+
 }
