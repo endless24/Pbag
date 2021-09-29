@@ -10,20 +10,21 @@
    
         <div class="">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 rounded">
-                <h1 class="text-3xl text-yellow-600"><font-awesome :icon="['far', 'edit']" /> Create Product</h1>
+                <h1 class="text-3xl text-yellow-600"><font-awesome :icon="['far', 'edit']" /> Create Post</h1>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="md:col-span-2 ">
                         <form name="frmPost" @submit.prevent="addPost()">
                             <div class="items-center gap-4 shadow-md rounded-lg my-4 border-l-4 border-yellow-600 px-5">
                                 <div class="mb-3">
-                                    <label for="" class="capitalize block">Product Name</label>
+                                    <label for="" class="capitalize block">Post Name</label>
                                     <input type="text" :class="inputClass" id="inputshadow" v-model="post.title">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="" class="capitalize block">Product Category</label>
+                                    <label for="" class="capitalize block">Post Category</label>
                                     <select :class="inputClass" id="inputshadow" v-model="post.category_id">
                                         <option value="" selected disabled>Select Product Category</option>
-                                        <option v-for="(cat, i) in categories" :key="i" :value="cat.id"> {{ cat.category }} </option>
+                                        <!-- <option v-for="(cat, i) in categories" :key="i" :value="cat.id"> {{ cat.category }} </option> -->
+                                        <option @click="isopen = !isopen" v-for="(cat, i) in categories" :key="i" :value="cat.id"> {{ cat.category }} </option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -31,8 +32,12 @@
                                     <input type="file" name="picture" :class="inputClass" @change="onFileChange">
                                     <!-- <input type="text" :class="inputClass" v-model="post.image"> -->
                                 </div>
+                                <div class="mb-3" v-if="isopen == true">
+                                    <label for="" class="capitalize block">Post Date</label>
+                                    <input type="date" placeholder="" :class="inputClass" id="inputshadow" v-model="post.pdate">
+                                </div>
                                 <div class="mb-3">
-                                    <label for="" class="capitalize block">Product Detail</label>
+                                    <label for="" class="capitalize block">Post Detail</label>
                                     <textarea :class="inputClass" class=" h-32 resize-none" id="inputshadow" v-model="post.content"></textarea>
                                 </div>
                                 <div>
@@ -54,7 +59,7 @@
                                     <p>recent post</p>
                                 </div>
                             </div>
-                            <div class="h-20 rounded-xl border grid grid-cols-4 gap-4 my-4 p-2 shadow-md" v-for="(post, i) in posts" :key="i" :value="post.id">
+                            <div class="py-3 rounded-xl border grid grid-cols-4 gap-4 my-4 p-2 shadow-md" v-for="(post, i) in posts" :key="i" :value="post.id">
                                 <div class="col-span-1 overflow-hidden bg-gray-500 rounded-lg">
                                     
                                 </div>
@@ -71,6 +76,7 @@
                                     </div>
                                 </div>
                             </div>
+                                <!-- {{ post.links() }} -->
                         </div>
 
 
@@ -92,6 +98,8 @@ export default {
     components: { AppLayout },
     data(){
         return {
+            isopen:false,
+
             inputClass:'border-blue-600 border-opacity-20 border-0 bg-gray-200 rounded h-12 lg:w-96 w-64',
             addBtn: 'px-2 py-2 mb-4 bg-gray-700 text-white rounded shadow-md hover:bg-blue-900',
 
@@ -99,9 +107,14 @@ export default {
                 title: '',
                 category_id: '',
                 // image: '',
+                pdate: '',
                 content: '',
             }, 
             posts: [],
+
+            category:'',
+            categories:[],
+
         }
     },
     methods: {
@@ -111,7 +124,8 @@ export default {
             .then((response)=>{
                 if (response.data.code == 200) {
                     alert(response.data.msg)
-                    this.fetchPost()
+                    this.post='';
+                    this.fetchPost();
                 }
                 if(res.data.code == 500) {
                     alert(response.data.msg)
@@ -138,6 +152,7 @@ export default {
                 .then((res) =>{
                     if(res.data.code == 200){
                         alert(res.data.msg)
+                        this.fetchPost()
                     }
                     if(res.data.code == 500){
                         alert(res.data.msg)
@@ -148,21 +163,6 @@ export default {
             }
         },
 
-        addCategory(){
-            axios.post(route('api.store.category'), { cat: this.category})
-            .then((res) => {
-                if (res.data.status == 'success') {
-                    alert(res.data.msg)
-                    this.category = '';
-                    this.fetchCategory();
-                } else {
-                    alert(res.data.msg)
-                }
-            })
-            .catch((ex) => {
-                console.log(ex);
-            })
-        },
         fetchCategory(){
             axios.post(route('api.fetch.category'))
             .then((res) => {

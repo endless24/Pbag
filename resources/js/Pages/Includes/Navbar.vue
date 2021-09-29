@@ -1,5 +1,5 @@
 <template>
-    <div class=" bg-gray-900 bg-opacity-40 py-8 fixed top-0 w-full z-50">
+    <div class=" bg-gray-900 bg-opacity-80 py-8 fixed top-0 w-full z-50">
         <div class="container max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class=" col-span-1 text-3xl text-center">
@@ -7,8 +7,8 @@
                         <span class=" bg-yellow-600 text-white px-3 py-3 text-2xl rounded-full font-semibold hword"  id="hword1">
                             <i>GTC</i>
                         </span>
-                    <i class=" text-yellow-600" ></i>
-                    <span class=" text-white py-3 hword">Church</span>
+                        <i class=" text-yellow-600" ></i>
+                        <span class=" text-white py-3 hword">Church</span>
                     </span>
                 </div>
                 <div class="col-span-2 py-2">

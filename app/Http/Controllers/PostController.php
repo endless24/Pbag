@@ -65,6 +65,7 @@ class PostController extends Controller
         $add->category_id = $request->post['category_id'];
         // $add->img = $request->post['img'];
         $add->title = $request->post['title'];
+        $add->pdate = $request->post['pdate'];
         $add->content = $request->post['content'];
         if ($add->save()) {
             return response()->json([
@@ -82,6 +83,20 @@ class PostController extends Controller
     public function fetch_post()
     {
         $post = Post::latest()->get();
+        return json_encode($post);
+    }
+
+    public function fetch_post_mission()
+    {
+        $category = Category::where('category', 'Mission')->first();
+        $postmission = Post::all()->where('category_id', $category->id)->take(10);
+        return json_encode($postmission);
+    }
+
+    public function fetch_post_event()
+    {
+        $category = Category::where('category', 'Events')->first();
+        $post = Post::latest()->where('category_id', $category->id)->take(10)->get();
         return json_encode($post);
     }
 

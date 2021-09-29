@@ -19,7 +19,7 @@
                     <label for="phone" :class="labels">
                         <font-awesome :icon="['fas', 'phone']" /> Phone Number
                     </label>
-                    <input type="text" id="phone" :class="inputs" v-model="phone" required>
+                    <input type="text" id="phone" :class="inputs" v-model="phone">
                 </div>
                 <div :class="form_group">
                     <label for="password" :class="labels">
@@ -86,11 +86,11 @@ export default {
 
             axios.post(route('register'), formData)
             .then(res => {
-                if(res.data.status == 'success'){
+                // if(res.data.status == 'success'){
                     this.$inertia.visit(route('dashboard'));
-                }else{
-                    alert('An Error occured!')
-                }
+                // }else{
+                //     alert('An Error occured!')
+                // }
             })
             .catch(err => {
                 if (err.response) {

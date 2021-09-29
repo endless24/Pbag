@@ -17,8 +17,9 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title');
             $table->bigInteger('category_id');
-            $table->mediumText('content');
+            $table->mediumText('content')->nullable();
             $table->string('img', 2048)->nullable();
+            $table->string('pdate')->nullable();
             $table->timestamps();
         });
     }

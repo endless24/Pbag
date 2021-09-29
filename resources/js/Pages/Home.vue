@@ -49,7 +49,7 @@
 
             <!-- the church -->
             <div class=" bg-white">
-                <div class=" mx-auto max-w-5xl py-28">
+                <div class=" mx-auto max-w-5xl py-28 px-8 lg:px-0">
                     <h1 class="font-bold tracking-widest uppercase text-yellow-600 text-center text-md mb-6">the church</h1>
                     <h1 class="font-bold text-gray-800 text-3xl md:text-4xl lg:text-5xl font-serif mb-6 text-center">
                         We are a church that believes in Jesus & loves God and people    
@@ -64,28 +64,58 @@
 
             <!-- the Mission -->
             <div class="">
-                <div class=" mx-auto max-w-5xl py-28">
+                <div class=" mx-auto max-w-5xl py-28 px-8 lg:px-0">
                     <h1 class="font-bold tracking-widest uppercase text-yellow-600 text-center text-md mb-6">
                         what we do
                     </h1>
                     <h1 class="font-bold text-gray-800 text-3xl md:text-4xl lg:text-5xl font-serif mb-6 text-center">
                         Our Mission
                     </h1>
-                    <h2 class="text-yellow-600 text-xl font-bold text-center">__________</h2>
+                    <center><hr class="border border-yellow-600 w-20 mb-6" /></center>
 
-                    <div class=" grid grid-cols-3 gap-4">
+                    <div class=" md:grid grid-cols-3 gap-8">
                         <div class=" col-span-1 mt-16" v-for="(post, i) in posts" :key="i" :value="post.id">
                             <div class="bg-gray-500 mb-6">
                                 <!-- <div class=" bg-gray-600 text-yellow-600 w-full h-full z-50 cover_img">Hello</div> -->
                                 <img src="images/pray.jpg" alt="" class=" object-cover w-full img_c">
                             </div>
-                            <h1 class="font-bold text-gray-600 text-3xl font-serif mb-6 text-center hover:text-yellow-600">
+                            <h1 class="font-bold text-gray-800 text-3xl font-serif mb-6 text-center hover:text-yellow-600">
                                 <i>{{ post.title }}</i>
                             </h1>
-                            <h2 class="text-yellow-600 text-xl font-bold text-center mb-6">__________</h2>
+                            <center><hr class="border border-yellow-600 w-20 mb-6" /></center>
                             <h1 class="font-bold text-gray-500 text-md font-serif text-center">
                                 {{ post.content }}        
                             </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- the Events -->
+            <div class=" bg-white">
+                <div class=" mx-auto max-w-5xl py-28 px-8 lg:px-0">
+                    <h1 class="font-bold tracking-widest uppercase text-yellow-600 text-center text-md mb-6">
+                        calendar
+                    </h1>
+                    <h1 class="font-bold text-gray-800 text-3xl md:text-4xl lg:text-5xl font-serif mb-6 text-center">
+                        Upcoming Events
+                    </h1>
+                    <center><hr class="border border-yellow-600 w-20 mb-6" /></center>
+
+                    <div class=" md:grid grid-cols-3 gap-8">
+                        <div class=" col-span-1 mt-16" v-for="(event, i) in events" :key="i" :value="event.id">
+                            <div class="bg-gray-500 mb-8">
+                                <!-- <div class=" bg-gray-600 text-yellow-600 w-full h-full z-50 cover_img">Hello</div> -->
+                                <img src="images/pray.jpg" alt="" class=" object-cover w-full img_c">
+                            </div>
+                            <h1 class="font-bold tracking-wide uppercase text-yellow-600 text-lg mb-4">
+                                {{ event.pdate }}
+                            </h1>
+                            <a href="">
+                                <h1 class="font-bold text-gray-800 text-xl font-serif hover:text-yellow-600">
+                                    {{ event.title }}
+                                </h1>   
+                            </a>                         
                         </div>
                     </div>
                 </div>
@@ -100,7 +130,8 @@
 
 <script>
 import WebLayout from '../Layouts/WebLayout.vue';
-import { usePage } from "@inertiajs/inertia-vue3";
+// import Button from '../Jetstream/Button.vue';
+// import { usePage } from "@inertiajs/inertia-vue3";
 import axios from 'axios'
 
 export default {
@@ -110,18 +141,25 @@ export default {
 
           post: {
                 title: '',
-                category_id: '',
                 // image: '',
                 content: '',
             }, 
             posts: [],
 
+             event: {
+                title: '',
+                pdate: '',
+                // image: '',
+                content: '',
+            }, 
+            events: [],
+
     }
   },
   methods : {
       
-      fetchPost(){
-            axios.post(route('api.fetch.post'))
+        fetchPostmission(){
+            axios.post(route('api.fetch.post.mission'))
             .then((res) => {
                 this.posts = res.data
             })
@@ -129,9 +167,20 @@ export default {
                 console.log(ex);
             })
         },
+
+        fetchPostevent(){
+            axios.post(route('api.fetch.post.event'))
+            .then((res) => {
+                this.events = res.data
+            })
+            .catch((ex) => {
+                console.log(ex);
+            })
+        },
   },
   mounted(){
-        this.fetchPost();
+        this.fetchPostmission();
+        this.fetchPostevent();
     }
 
 }

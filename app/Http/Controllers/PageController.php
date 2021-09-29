@@ -38,6 +38,7 @@ class PageController extends Controller
         return Inertia::render('Category');
     }
 
+    
     // public function login(LoginRequest $request)
     // {
     //     $request->validate([
