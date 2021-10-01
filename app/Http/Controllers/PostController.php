@@ -4,79 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Event;
 use App\Models\Contact;
 use App\Models\Category;
+use App\Models\Testimony;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function store_category(Request $request)
+    // Posts Mission
+    public function store_post(Request $request)
     {
-        if (Category::where('category', $request->cat)->exists()) {
+        if (Post::where('title', $request->title)->exists()) {
             return response()->json([
-                'status' => 'error',
-                'msg' => 'Category already exists'
+                'status' => 'success',
+                'msg' => 'This Post already exists',
             ]);
         } else {
-            $category = new Category;
-            $category->category = $request->cat;
-            if ($category->save()) {
+            $add = new Post;
+            // $add->img = $request->post['img'];
+            $add->title = $request->title;
+            $add->content = $request->content;
+            if ($add->save()) {
                 return response()->json([
-                    'status' => 'success',
-                    'msg' => 'Category added successfully'
+                    'code' => 200,
+                    'msg' => 'Mission added successfully',
                 ]);
             } else {
                 return response()->json([
-                    'status' => 'error',
-                    'msg' => 'An error occured!'
+                    'code' => 500,
+                    'msg' => 'An error occured!',
                 ]);
             }
-        }
-                
-    }
-
-    public function fetch_category()
-    {
-        $category = Category::all();
-        return json_encode($category);
-    }
-
-    public function delete_category(Request $request)
-    {
-        $delete = Category::find($request->cat);
-        if ($delete->delete()) {
-            return response()->json([
-                'code' => 200,
-                'msg' => 'Category Deleted'
-            ]);
-        } else {
-            return response()->json([
-                'code' => 500,
-                'msg' => 'An error occured!'
-            ]);
-        }
-    }
-
-    // Posts
-
-    public function store_post(Request $request)
-    {
-        $add = new Post;
-        $add->category_id = $request->post['category_id'];
-        // $add->img = $request->post['img'];
-        $add->title = $request->post['title'];
-        $add->pdate = $request->post['pdate'];
-        $add->content = $request->post['content'];
-        if ($add->save()) {
-            return response()->json([
-                'code' => 200,
-                'msg' => 'Post added successfully'
-            ]);
-        }else{
-            return response()->json([
-                'code' => 500,
-                'msg' => 'An error occured!'
-            ]);
         }
     }
 
@@ -88,16 +47,18 @@ class PostController extends Controller
 
     public function fetch_post_mission()
     {
-        $category = Category::where('category', 'Mission')->first();
-        $postmission = Post::all()->where('category_id', $category->id)->take(10);
+        // $postmission = Post::latest()->take(3)->get();
+        $postmission = Post::all()->take(3);
         return json_encode($postmission);
     }
 
-    public function fetch_post_event()
+    public function fetch_post_mission_count($id)
     {
-        $category = Category::where('category', 'Events')->first();
-        $post = Post::latest()->where('category_id', $category->id)->take(10)->get();
-        return json_encode($post);
+        // $postmission1 = Post::count();
+        // return json_encode($postmission1);
+        $postmission1 = Post::where('id',$id)->count();
+        return json_encode($postmission1);
+        // return Participant::where('event_id',$id)->count();
     }
 
     public function delete_post(Request $request)
@@ -106,27 +67,87 @@ class PostController extends Controller
         if ($delete->delete()) {
             return response()->json([
                 'code' => 200,
-                'msg' => 'Post deleted Successfully'
+                'msg' => 'Mission deleted Successfully',
             ]);
-        }else {
+        } else {
             return response()->json([
                 'code' => 500,
-                'msg' => 'Error occured!'
+                'msg' => 'Error occured!',
             ]);
         }
     }
 
-    public function store_contact(Request $request)
+    // Posts Event
+    public function store_event(Request $request)
     {
-        $contact = new Contact;
-        $contact->fullname = $request->cont['fullname'];
-        $contact->email = $request->cont['email'];
-        $contact->subject = $request->cont['subject'];
-        $contact->content = $request->cont['content'];
-        if ($contact->save()) {
+        if (Event::where('pdate', $request->pdate)->exists()) {
             return response()->json([
                 'status' => 'success',
-                'msg' => 'Message Sent Successfully'
+                'msg' => 'This Date already exists, please choose another date',
+            ]);
+        } else {
+            $addevent = new Event;
+            $addevent->title = $request->title;
+            $addevent->pdate = $request->pdate;
+            $addevent->content = $request->content;
+            if ($addevent->save()) {
+                return response()->json([
+                    'code' => 200,
+                    'msg' => 'Event added successfully',
+                ]);
+            } else {
+                return response()->json([
+                    'code' => 500,
+                    'msg' => 'An error occured!',
+                ]);
+            }
+        }
+    }
+
+    public function fetch_event()
+    {
+        $event = Event::latest()->get();
+        return json_encode($event);
+    }
+
+    public function fetch_post_event()
+    {
+        $postevent = Event::latest()
+            ->take(3)
+            ->get();
+        // $postevent = Post::all()->take(3);
+        return json_encode($postevent);
+    }
+
+    public function delete_event(Request $request)
+    {
+        $delete = Event::find($request->id);
+        if ($delete->delete()) {
+            return response()->json([
+                'code' => 200,
+                'msg' => 'Event deleted Successfully',
+            ]);
+        } else {
+            return response()->json([
+                'code' => 500,
+                'msg' => 'Error occured!',
+            ]);
+        }
+    }
+
+    // TESTIMONY POSTS  
+    public function store_testimony(Request $request)
+    {
+        $testimony = new Testimony;
+        $testimony->fullname = $request->fullname;
+        $testimony->phone = $request->phone;
+        $testimony->email = $request->email;
+        $testimony->subject = $request->subject;
+        $testimony->content = $request->content;
+        if ($testimony->save()) {
+            return response()->json([
+                'status' => 'success',
+                'msg' => 'Thank You For Sharing Your Testimony'
             ]);
         } else {
             return response()->json([
@@ -135,12 +156,60 @@ class PostController extends Controller
             ]);
         }
     }
-                
-    
-    public function fetch_contact()
+
+    public function fetch_testimony()
     {
-        $contact = Contact::all();
-        return json_encode($contact);
+        $testimony = Testimony::all();
+        return json_encode($testimony);
     }
 
+    public function fetch_testimony_once()
+    {
+        $testimonyonce = Testimony::latest()->take(1)->get();
+        return json_encode($testimonyonce);
+    }
+    
+    public function delete_testimony(Request $request)
+    {
+        $delete = Testimony::find($request->id);
+        if ($delete->delete()) {
+            return response()->json([
+                'code' => 200,
+                'msg' => 'Testimony deleted Successfully',
+            ]);
+        } else {
+            return response()->json([
+                'code' => 500,
+                'msg' => 'Error occured!',
+            ]);
+        }
+    }
+    
+
+    // CONTACTS
+    // public function store_contact(Request $request)
+    // {
+    //     $contact = new Contact;
+    //     $contact->fullname = $request->cont['fullname'];
+    //     $contact->email = $request->cont['email'];
+    //     $contact->subject = $request->cont['subject'];
+    //     $contact->content = $request->cont['content'];
+    //     if ($contact->save()) {
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'msg' => 'Message Sent Successfully'
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'msg' => 'An error occured!'
+    //         ]);
+    //     }
+    // }
+
+    // public function fetch_contact()
+    // {
+    //     $contact = Contact::all();
+    //     return json_encode($contact);
+    // }
 }

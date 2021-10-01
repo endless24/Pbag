@@ -13,34 +13,24 @@
                 </div>
                 <div class="col-span-2 py-2">
                     <Link :href="route('home')" :class="navclasses" class="navbar">
-                        <!-- <font-awesome :icon="['fas', 'home']" />  -->
+                        <font-awesome :icon="['fas', 'home']" class="text-yellow-600" /> 
                         Home
                     </Link>
 
                     <Link :href="route('about')" :class="navclasses" class="navbar">
-                        <!-- <font-awesome :icon="['fas', 'info']" />  -->
+                        <font-awesome :icon="['fas', 'info']" class="text-yellow-600"/> 
                         About
                     </Link>
 
                     <Link :href="route('contact')" :class="navclasses" class="navbar">
-                        <!-- <font-awesome :icon="['fas', 'phone']" />  -->
+                        <font-awesome :icon="['fas', 'phone']" class="text-yellow-600"/> 
                         Contact
                     </Link>
-                    <!-- <Link :href="route('posts')" :class="navclasses">
-                        <font-awesome :icon="['far', 'comments']" /> Blog Post
+                    <Link :href="route('testimony')" :class="navclasses" class="navbar">
+                        <font-awesome :icon="['fas', 'praying-hands']" class="text-yellow-600"/> 
+                        Testimony
                     </Link>
-                    <Link :href="route('categories')" :class="navclasses">
-                        <font-awesome :icon="['fas', 'layer-group']" /> Category
-                    </Link>
-                    <Link :href="route('addposts')" :class="navclasses">
-                        <font-awesome :icon="['far', 'edit']" /> Make Post
-                    </Link>
-                    <Link :href="route('about')" :class="navclasses">
-                        <font-awesome :icon="['fas', 'info-circle']" /> About Us
-                    </Link>
-                    <Link :href="route('contact')" :class="navclasses">
-                        <font-awesome :icon="['fas', 'phone']" /> Contact Us
-                    </Link> -->
+                    
                 </div>
                 
             </div>
