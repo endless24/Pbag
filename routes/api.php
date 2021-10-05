@@ -30,6 +30,12 @@ Route::prefix('post')->group(function () {
     Route::post('/delete',[PostController::class, 'delete_post'])->name('api.delete.post');
 });
 
+Route::prefix('contact')->group(function () {
+    Route::post('/add',[PostController::class,'store_contact'])->name('api.store.contact');
+    Route::post('/fetch',[PostController::class,'fetch_contact'])->name('api.fetch.contact');
+    Route::post('/delete',[PostController::class,'delete_contact'])->name('api.delete.contact');
+});
+
 Route::prefix('category')->group(function () {
     Route::post('/add', [PostController::class, 'store_category'])->name('api.store.category');
     Route::post('/fetch', [PostController::class, 'fetch_category'])->name('api.fetch.category');

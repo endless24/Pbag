@@ -86,12 +86,12 @@ class PostController extends Controller
         return json_encode($post);
     }
 
-    public function fetch_post_mission()
-    {
-        $category = Category::where('category', 'Mission')->first();
-        $postmission = Post::all()->where('category_id', $category->id)->take(10);
-        return json_encode($postmission);
-    }
+    // public function fetch_post_mission()
+    // {
+    //     $category = Category::where('category', 'Mission')->first();
+    //     $postmission = Post::all()->where('category_id', $category->id)->take(10);
+    //     return json_encode($postmission);
+    // }
 
     public function fetch_post_event()
     {
@@ -119,10 +119,9 @@ class PostController extends Controller
     public function store_contact(Request $request)
     {
         $contact = new Contact;
-        $contact->fullname = $request->cont['fullname'];
-        $contact->email = $request->cont['email'];
-        $contact->subject = $request->cont['subject'];
-        $contact->content = $request->cont['content'];
+        $contact->fullname = $request->contat['fullname'];
+        $contact->email = $request->contat['email'];
+        $contact->content = $request->contat['content'];
         if ($contact->save()) {
             return response()->json([
                 'status' => 'success',

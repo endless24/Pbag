@@ -11,11 +11,7 @@ import { faBars, faBell, faEnvelope, faHome, faInfo, faKey, faLayerGroup, faLock
 import { faBuilding, faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookF, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
-<<<<<<< HEAD
-library.add( faHome, faSignInAlt, faRegistered, faUser, faKey, faEnvelope, faPhone, faLock, faPowerOff, faPen, faBell, faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo, faInstagram, faWhatsapp, faFacebookF, faMapSigns, faBuilding)
-=======
-library.add( faHome, faSignInAlt, faRegistered, faUser, faKey, faEnvelope, faPhone, faLock, faPowerOff, faPen, faBell, faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo,)
->>>>>>> 44ea2786dfad88ab1888862cdb6545bd09c1468f
+library.add( faHome, faSignInAlt,faFacebookF,faInstagram,faWhatsapp, faRegistered,faBuilding, faUser, faKey, faEnvelope, faPhone, faLock,faMapSigns, faPowerOff, faPen, faBell, faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo,)
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'PolyBag';
 

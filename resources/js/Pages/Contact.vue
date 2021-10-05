@@ -14,26 +14,26 @@
                             Send Us a Message
                         </div>
                         <hr class="border my-6 border-yellow-600 w-20">
-                        <form action="">
+                        <form  @submit.prevent="addcontact()">
                             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
                                 <div class="col-span-1">
-                                    <label for="name">Name<span class="text-xl text-yellow-600">*</span></label>
+                                    <label for="name">fullname<span class="text-xl text-yellow-600">*</span></label>
                                    <div class="py-2">
-                                        <input type="text " v-model="name" class=" shadow-md rounded w-full h-10 border">
+                                        <input type="text " required v-model="contact.fullname" class=" px-2 shadow-md rounded w-full h-10 border">
                                    </div>
                                 </div>
 
                                 <div class="col-span-1">
                                     <label for="name">Email<span class="text-xl text-yellow-600">*</span></label>
                                    <div class="py-2">
-                                        <input type="text " v-model="email" class="shadow-md  rounded w-full h-10 border ">
+                                        <input type="email " required v-model="contact.email" class="shadow-md px-2  rounded w-full h-10 border ">
                                    </div>
                                 </div>
                             </div>
                             <div class="">
                                 <label for="name">Message<span class="text-xl text-yellow-600">*</span></label>
                                 <div class="py-2">
-                                    <textarea name="" v-model="content" class="shadow-md  rounded w-full h-36 border resize-none    "></textarea> 
+                                    <textarea name="" required v-model="contact.content" class="shadow-md px-2  rounded w-full h-36 border resize-none    "></textarea> 
                                 </div>
                             </div>
                               <div class="mt-3">
@@ -83,14 +83,32 @@
 <script>
 import WebLayout from '../Layouts/WebLayout.vue';
 import { usePage } from "@inertiajs/inertia-vue3";
+import axios from 'axios';
 
 export default {
   components: { WebLayout },
   data(){
       return {
-
+          contact:{
+                  fullname:'',
+                  email:'',
+                  content:'',
+              },
+        }
+    },
+    methods:{
+        addcontact(){
+            axios.post(route('api.store.contact'), {contat: this.contact})
+            .then((res)=>{
+               if (res.data.status =='success') {
+                    alert(res.data.msg);
+                    this.contact='';
+               }else{
+                    alert(res.data.msg);
+               }
+            })
+        }
     }
-  }
 
 }
 </script>
