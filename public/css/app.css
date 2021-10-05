@@ -1566,6 +1566,9 @@ select {
 .gap-8 {
 	gap: 2rem;
 }
+.gap-2 {
+	gap: 0.5rem;
+}
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
 	--tw-space-x-reverse: 0;
 	margin-right: calc(2rem * var(--tw-space-x-reverse));
@@ -1783,6 +1786,9 @@ select {
 }
 .bg-opacity-70 {
 	--tw-bg-opacity: 0.7;
+}
+.bg-opacity-40 {
+	--tw-bg-opacity: 0.4;
 }
 .from-gray-400 {
 	--tw-gradient-from: #9ca3af;
@@ -2126,6 +2132,10 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(217, 119, 6, var(--tw-text-opacity));
 }
+.text-blue-900 {
+	--tw-text-opacity: 1;
+	color: rgba(30, 58, 138, var(--tw-text-opacity));
+}
 .text-opacity-20 {
 	--tw-text-opacity: 0.2;
 }
@@ -2282,6 +2292,10 @@ select {
 }
 .hover\:bg-gradient-to-b:hover {
 	background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+.hover\:text-lg:hover {
+	font-size: 1.125rem;
+	line-height: 1.75rem;
 }
 .hover\:text-gray-500:hover {
 	--tw-text-opacity: 1;
@@ -2776,6 +2790,10 @@ select {
 
 	.lg\:p-20 {
 		padding: 5rem;
+	}
+
+	.lg\:p-6 {
+		padding: 1.5rem;
 	}
 
 	.lg\:px-8 {

@@ -38,9 +38,11 @@ use App\Http\Controllers\PageController;
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/aboutus', [PageController::class, 'aboutus'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::get('/testimony', [PageController::class, 'testimony'])->name('testimony');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
     Route::get('/add-post', [PageController::class, 'add_post'])->name('add_post');
+    Route::get('/add-event', [PageController::class, 'add_event'])->name('add_event');
     Route::get('/add-category', [PageController::class, 'add_category'])->name('add_category');
     // Route::get('/manage-post', [PageController::class, 'view_category'])->name('categories');
 });

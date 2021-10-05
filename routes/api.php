@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\PageController;
@@ -26,7 +25,7 @@ Route::prefix('post')->group(function () {
     Route::post('/add',[PostController::class, 'store_post'])->name('api.store.post');
     Route::post('/fetch',[PostController::class, 'fetch_post'])->name('api.fetch.post');
     Route::post('/fetchmission',[PostController::class, 'fetch_post_mission'])->name('api.fetch.post.mission');
-    Route::post('/fetchevent',[PostController::class, 'fetch_post_event'])->name('api.fetch.post.event');
+    Route::post('/fetchmissioncount/{id}',[PostController::class, 'fetch_post_mission_count'])->name('api.fetch.post.mission.count');
     Route::post('/delete',[PostController::class, 'delete_post'])->name('api.delete.post');
 });
 

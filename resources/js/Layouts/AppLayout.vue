@@ -15,11 +15,14 @@
                 <Link :href="route('dashboard')" :class="navclasses" id="navbar">
                     <font-awesome :icon="['fas', 'home']" /> Dashboard
                 </Link>
-                <Link :href="route('add_category')" :class="navclasses">
+                <!-- <Link :href="route('add_category')" :class="navclasses">
                     <font-awesome :icon="['fas', 'layer-group']" /> Add Category
-                </Link>
+                </Link> -->
                 <Link :href="route('add_post')" :class="navclasses">
-                    <font-awesome :icon="['fas', 'pen']" /> Add Post
+                    <font-awesome :icon="['fas', 'pen']" /> Add Mission
+                </Link>
+                <Link :href="route('add_event')" :class="navclasses">
+                    <font-awesome :icon="['fas', 'pen']" /> Add Event
                 </Link>
                 <Link @click="logout()" :class="navclasses" id="navbar">
                     <font-awesome :icon="['fas', 'power-off']" /> Logout

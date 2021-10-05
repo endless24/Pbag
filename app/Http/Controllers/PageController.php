@@ -12,19 +12,29 @@ use App\Http\Requests\RegisterRequest;
 
 class PageController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return Inertia::render('Home');
     }
 
-    public function aboutus(){
+    public function aboutus()
+    {
         return Inertia::render('About');
     }
 
-    public function contact(){
+    public function contact()
+    {
         return Inertia::render('Contact');
     }
 
-    public function dashboard(){
+    public function testimony()
+    {
+        return Inertia::render('Testimonies');
+    }
+
+
+    public function dashboard()
+    {
         return Inertia::render('Dashboard');
     }
 
@@ -33,12 +43,16 @@ class PageController extends Controller
         return Inertia::render('AddPost');
     }
 
+    public function add_event()
+    {
+        return Inertia::render('AddEvent');
+    }
+
     public function add_category()
     {
         return Inertia::render('Category');
     }
 
-    
     // public function login(LoginRequest $request)
     // {
     //     $request->validate([
@@ -65,7 +79,7 @@ class PageController extends Controller
     //         ]);
     //     }
     // }
-    
+
     // public function register(RegisterRequest $request)
     // {
     //     $request->validate([
@@ -85,7 +99,7 @@ class PageController extends Controller
     //             if (!$request->has('endpoint')) {
     //                 $request->session()->regenerate();
     //             }
-    
+
     //             $responses = [
     //                 'apitoken' => $request->user()->createToken('User Token')->plainTextToken
     //             ];
@@ -99,7 +113,7 @@ class PageController extends Controller
     //                 'status' => 'auth_error'
     //             ]);
     //         }
-            
+
     //     }else{
     //         return response()->json([
     //             'status' => 'error'
@@ -110,19 +124,23 @@ class PageController extends Controller
 
     public function delete_token(Request $request)
     {
-        if ($request->user()->tokens()->delete()) {
+        if (
+            $request
+                ->user()
+                ->tokens()
+                ->delete()
+        ) {
             return response()->json([
                 'status' => 'success',
                 'messages' => '',
-                'result' => []
+                'result' => [],
             ]);
-        }else{
+        } else {
             return response()->json([
                 'status' => 'error',
                 'messages' => '',
-                'result' => []
+                'result' => [],
             ]);
         }
     }
-
 }
