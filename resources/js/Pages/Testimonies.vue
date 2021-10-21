@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="col-span-1 p-6">
-                        <form name="frmContact" @submit.prevent="addTestimony()" >
+                        <form name="frmContact" @submit.prevent="addTestimony()">
                             <div class="grid md:grid-cols-2 gap-1">
                                 <div class="mb-4 col-span-1">
                                     <label for="Fullname" class="mb-2 text-xl">
