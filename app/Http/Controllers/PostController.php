@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Models\Category;
 use App\Models\Testimony;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
@@ -38,17 +39,39 @@ class PostController extends Controller
             }
         }
     }
-
+// fetching mission post at admin side
     public function fetch_post()
     {
         $post = Post::latest()->get();
         return json_encode($post);
     }
 
+    // getting count of event
+    public function event_count()
+    {
+        $event = Event::count();
+        return json_encode($event);
+    }
+
+    // getting count of mission
+    public function mission_count()
+    {
+        $mission = Post::count();
+        return json_encode($mission);
+    }
+
+    // getting count of testimonies
+    public function count_testimony()
+    {
+        $testimony = Testimony::count();
+        return json_encode($testimony);
+    }
+
+// fetching mission post at the home page
     public function fetch_post_mission()
     {
         // $postmission = Post::latest()->take(3)->get();
-        $postmission = Post::all()->take(3);
+        $postmission = Post::latest()->take(3)->get();
         return json_encode($postmission);
     }
 
@@ -104,17 +127,17 @@ class PostController extends Controller
         }
     }
 
+    // fetching event post at the admin side
     public function fetch_event()
     {
         $event = Event::latest()->get();
         return json_encode($event);
     }
 
+    // fetching event post at the home page
     public function fetch_post_event()
     {
-        $postevent = Event::latest()
-            ->take(3)
-            ->get();
+        $postevent = Event::latest()->take(3)->get();
         // $postevent = Post::all()->take(3);
         return json_encode($postevent);
     }
@@ -156,16 +179,26 @@ class PostController extends Controller
             ]);
         }
     }
+    // getting id of the event post you want to view it's details
+    public function showpost($id)
+    {
+        $showpost = Event::find($id);
+        // rendering page to display the details
+        return Inertia::render('Event_details',['eventpost'=>$showpost]);
+        // return json_encode($showpost);
+    }
 
     public function fetch_testimony()
     {
-        $testimony = Testimony::all();
+        $testimony = Testimony::latest()->get();
         return json_encode($testimony);
     }
 
     public function fetch_testimony_once()
     {
-        $testimonyonce = Testimony::latest()->take(1)->get();
+        $testimonyonce = Testimony::latest()
+        ->take(3)
+        ->get();
         return json_encode($testimonyonce);
     }
     
@@ -187,29 +220,28 @@ class PostController extends Controller
     
 
     // CONTACTS
-    // public function store_contact(Request $request)
-    // {
-    //     $contact = new Contact;
-    //     $contact->fullname = $request->cont['fullname'];
-    //     $contact->email = $request->cont['email'];
-    //     $contact->subject = $request->cont['subject'];
-    //     $contact->content = $request->cont['content'];
-    //     if ($contact->save()) {
-    //         return response()->json([
-    //             'status' => 'success',
-    //             'msg' => 'Message Sent Successfully'
-    //         ]);
-    //     } else {
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'msg' => 'An error occured!'
-    //         ]);
-    //     }
-    // }
+    public function store_contact(Request $request)
+    {
+        $contact = new Contact;
+        $contact->fullname = $request->contat['fullname'];
+        $contact->email = $request->contat['email'];
+        $contact->content = $request->contat['content'];
+        if ($contact->save()) {
+            return response()->json([
+                'status' => 'success',
+                'msg' => 'Message Sent Successfully'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'An error occured!'
+            ]);
+        }
+    }
 
-    // public function fetch_contact()
-    // {
-    //     $contact = Contact::all();
-    //     return json_encode($contact);
-    // }
+    public function fetch_contact()
+    {
+        $contact = Contact::all();
+        return json_encode($contact);
+    }
 }

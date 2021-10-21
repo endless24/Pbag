@@ -2,7 +2,7 @@
     <web-layout>
         <!-- card about the church -->
         <div class=" bg-white rounded overflow-hidden  ">
-            <div class="h-52 mx-auto max-w-7xl" :style="{'background-image':'url(images/prayer1.jpeg)', 'background-size':'cover','background-position':'center'}">
+            <div class="h-52 mx-auto max-w-7xl rounded-b overflow-hidden " :style="{'background-image':'url(images/prayer1.jpeg)', 'background-size':'cover','background-position':'center'}">
               <!-- <h1 class="text-4xl font-bold font-serif capitalize pl-24 pt-16 text-white "> testimony</h1> -->
             </div>
             <div class=" mt-10">
@@ -34,7 +34,7 @@
                             </div>
                             <div class="grid md:grid-cols-2 gap-1">
                                 <div class="mb-4 col-span-1">
-                                    <label for="Phone" class="mb-2 text-xl">
+                                    <label for="Phone" class="mb-2 text-xl ">
                                         <!-- <font-awesome :icon="['far', 'user']" class="" />  -->
                                         Phone<span class="text-yellow-600">*</span>
                                     </label>
@@ -56,7 +56,7 @@
                                 <textarea :class="inputClass" id="inputShadow" class="h-36 resize-none" v-model="content" placeholder="Your Testimony..." required></textarea>
                             </div>
                             <div class="mb-4">
-                                <button type="submit" class="py-1 px-3 h-12 rounded text-blue-900 font-bold" id="addbtn">
+                                <button type="submit" class="py-3 px-5 rounded text-gray-700 border font-bold hover:bg-yellow-600 hover:text-white hover:transition-all duration-700">
                                     Submit
                                     <font-awesome :icon="['fas', 'plus']" class="" /> 
                                 </button>
@@ -81,7 +81,7 @@ export default {
   components: { WebLayout },
   data(){
       return {
-            inputClass: 'block h-10 rounded w-full px-3 border border-gray-50',
+            inputClass: ' outline-none  h-10 rounded w-full px-3 border border-gray-50',
 
                 fullname:'',
                 email:'',
@@ -152,9 +152,9 @@ export default {
     box-shadow: 2.0px 4.0px 4.0px hsl(0deg 0% 0% / 0.38);
 }
 
-#addbtn:hover{
+/* #addbtn:hover{
     background: #0000CD;
     color: #fff;
-}
+} */
 
 </style>

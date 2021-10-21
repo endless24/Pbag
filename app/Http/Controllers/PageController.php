@@ -48,10 +48,11 @@ class PageController extends Controller
         return Inertia::render('AddEvent');
     }
 
-    public function add_category()
-    {
-        return Inertia::render('Category');
-    }
+    // public function add_category()
+    // {
+    //     return Inertia::render('Category');
+    // }
+
 
     // public function login(LoginRequest $request)
     // {

@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,9 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/aboutus', [PageController::class, 'aboutus'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/testimony', [PageController::class, 'testimony'])->name('testimony');
+// route to view event post details
+Route::get('/viewpost/{id}', [PostController::class, 'showpost'])->name('viewpost');
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
     Route::get('/add-post', [PageController::class, 'add_post'])->name('add_post');

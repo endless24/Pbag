@@ -11,11 +11,10 @@ import { faBars, faBell, faEnvelope, faHome, faInfo, faKey, faLayerGroup, faLock
 import { faBuilding, faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookF, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
-<<<<<<< HEAD
+
 library.add( faHome, faSignInAlt,faFacebookF,faInstagram,faWhatsapp, faRegistered,faBuilding, faUser, faKey, faEnvelope, faPhone, faLock,faMapSigns, faPowerOff, faPen, faBell, faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo,)
-=======
 library.add( faHome, faSignInAlt, faRegistered, faUser, faKey, faEnvelope, faPhone, faLock, faPowerOff, faPen, faBell, faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo, faBuilding, faFacebookF, faInstagram, faWhatsapp, faMapSigns, faPrayingHands)
->>>>>>> 2b33bc3f9bd0be0a40349bfe08230e474884b5b3
+
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'PolyBag';
 

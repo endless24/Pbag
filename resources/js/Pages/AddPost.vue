@@ -16,7 +16,7 @@
                         <form name="frmPost"  @submit.prevent="addPost()">
                             <div class="items-center gap-4 shadow-md rounded-lg my-4 border-l-4 border-yellow-600 px-5">
                                 <div class="mb-3">
-                                    <label for="" class="capitalize block">Post Name</label>
+                                    <label for="" class="capitalize py-3 block">Mission Name</label>
                                     <input type="text" required :class="inputClass" id="inputshadow" v-model="title">
                                 </div>
                                 <!-- <div class="mb-3">
@@ -32,8 +32,9 @@
                                     <input type="file" name="picture" :class="inputClass" @change="onFileChange">
                                 </div> -->
                                 <div class="mb-3">
-                                    <label for="" class="capitalize block">Post Detail</label>
-                                    <textarea :class="inputClass" required class=" h-32 resize-none" id="inputshadow" v-model="content"></textarea>
+                                    <label for="" class="capitalize block py-3">Mission Detail</label>
+                                    <textarea :class="inputClass" required class=" h-32 resize-none" id="inputshadow" v-model="content" v-on:input="check"></textarea>
+                                    <p :class="{help: true, 'text-red-700': remaining==0}">{{instruction}}</p>
                                 </div>
                                 <div>
                                     <button :class="addBtn">
@@ -51,7 +52,7 @@
                         <div class="border-l-4 border-gray-600 rounded-lg">
                             <div class="w-full rounded-lg">
                                 <div class="w-11/12 h-10 text-yellow-600 font-bold text-lg flex items-center mx-auto capitalize">
-                                    <p>recent post</p>
+                                    <p>recent Mission</p>
                                 </div>
                             </div>
                             <div class="py-3 rounded-xl border grid grid-cols-4 gap-4 my-4 p-2 shadow-md" v-for="(post, i) in posts" :key="i" :value="post.id">
@@ -101,10 +102,28 @@ export default {
             content: '',
             posts: [],
 
+             limit: 200, // limiting how many letters to be entered in textarea
+             
             
         }
     },
+     // limiting how many letters to be entered in textarea
+     computed: {
+                instruction: function() {  
+                return this.content==''?
+                'limit: '+this.limit+' characters':
+                'remaining '+this.remaining+' characters';      
+                },
+                remaining: function() {
+                return this.limit-this.content.length;
+             }
+         },
+
     methods: {
+        // limiting how many letters to be entered in textarea
+        check: function() {
+            this.content = this.content.substr(0, this.limit)
+        },
         
         addPost(){
             axios.post(route('api.store.post'), {title: this.title, content: this.content})

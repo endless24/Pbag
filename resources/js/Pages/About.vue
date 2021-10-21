@@ -2,7 +2,7 @@
     <web-layout>
         <!-- card about the church -->
         <div class=" bg-white rounded overflow-hidden  ">
-            <div class="h-52 mx-auto max-w-7xl" :style="{'background-image':'url(images/top.jpg)', 'background-size':'cover','background-position':'right'}">
+            <div class="h-52 mx-auto max-w-7xl rounded-b overflow-hidden" :style="{'background-image':'url(images/top.jpg)', 'background-size':'cover','background-position':'right'}">
               <h1 class="text-4xl font-bold font-serif capitalize pl-24 pt-16 text-white ">about - us</h1>
             </div>
             <div class=" mt-10">
@@ -35,10 +35,10 @@
             </div>
             <center> <hr class="border border-yellow-600 w-14 text-center "></center>
             
-            <div class=" mt-8">
+            <div class="">
                 <div class=" lg:p-20 p-10 mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2">
                     <div class="col-span-1 rounded overflow-hidden ">
-                         <img src="images/pastor.jpg" alt="" class=" h-full " >
+                         <img src="images/Capture.png" alt="" class=" h-full float-right" >
                     </div>
                     <div class="col-span-1 lg:mt-0 mt-4 lg:px-5">
                         <div class="text-md font-mono gap-4 tracking-wide font-bold text-yellow-600  uppercase">

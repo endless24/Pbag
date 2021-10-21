@@ -1,7 +1,7 @@
 <template>
     <web-layout>
         <div class=" bg-white rounded overflow-hidden  ">
-            <div class="h-52 mx-auto max-w-7xl" :style="{'background-image':'url(images/top.jpg)', 'background-size':'cover','background-position':'right'}">
+            <div class="h-52 mx-auto max-w-7xl rounded-b overflow-hidden" :style="{'background-image':'url(images/top.jpg)', 'background-size':'cover','background-position':'right'}">
               <h1 class="text-4xl font-bold font-serif capitalize pl-24 pt-16 text-white ">contact - us</h1>
             </div>
             <div class=" mt-8">
@@ -19,26 +19,27 @@
                                 <div class="col-span-1">
                                     <label for="name">fullname<span class="text-xl text-yellow-600">*</span></label>
                                    <div class="py-2">
-                                        <input type="text " required v-model="contact.fullname" class=" px-2 shadow-md rounded w-full h-10 border">
+                                        <input type="text " required v-model="contact.fullname" placeholder="Your Name" class=" px-2 outline-none shadow-md rounded w-full h-10 border">
                                    </div>
                                 </div>
 
                                 <div class="col-span-1">
                                     <label for="name">Email<span class="text-xl text-yellow-600">*</span></label>
                                    <div class="py-2">
-                                        <input type="email " required v-model="contact.email" class="shadow-md px-2  rounded w-full h-10 border ">
+                                        <input type="email " required v-model="contact.email" placeholder=" Your Email" class="shadow-md px-2 outline-none rounded w-full h-10 border ">
                                    </div>
                                 </div>
                             </div>
                             <div class="">
                                 <label for="name">Message<span class="text-xl text-yellow-600">*</span></label>
                                 <div class="py-2">
-                                    <textarea name="" required v-model="contact.content" class="shadow-md px-2  rounded w-full h-36 border resize-none    "></textarea> 
+                                     <textarea name="" required v-model="contact.content" placeholder="Your Message..." class=" shadow-md px-2 rounded w-full h-36  resize-none outline-none"></textarea> 
                                 </div>
                             </div>
                               <div class="mt-3">
-                                <button class="text-white rounded lg:px-6 px-2 py-1 lg:py-2 transition-all duration-500 bg-gray-800 hover:bg-yellow-600"> 
+                                <button class="text-gray-700 rounded lg:px-6 px-2 py-1 font-bold lg:py-2  shadow hover:transition-all duration-700 hover:text-white  hover:bg-yellow-600"> 
                                     Send
+                                     <font-awesome :icon="['fas', 'plus']" class="" /> 
                                     </button>
                             </div>
                         </form>
@@ -103,6 +104,7 @@ export default {
                if (res.data.status =='success') {
                     alert(res.data.msg);
                     this.contact='';
+                    this.$inertia.visit('');
                }else{
                     alert(res.data.msg);
                }
