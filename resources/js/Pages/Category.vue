@@ -127,9 +127,9 @@ export default {
     }
 }
 </script>
-
-<style>
-#inputshadow{
-    box-shadow: 2.0px 4.0px 4.0px hsl(0deg 10% 10% / 0.34);
-}
-</style>
+<!-- 
+// <style>
+// #inputshadow{
+//     box-shadow: 2.0px 4.0px 4.0px hsl(0deg 10% 10% / 0.34);
+// }
+// </style> -->

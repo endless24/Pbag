@@ -48,6 +48,11 @@ class PageController extends Controller
         return Inertia::render('AddEvent');
     }
 
+    public function admin_testimonies()
+    {
+        return Inertia::render('Testimony_admin');
+    }
+
     // public function add_category()
     // {
     //     return Inertia::render('Category');

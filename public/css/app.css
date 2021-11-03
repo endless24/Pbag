@@ -1147,6 +1147,9 @@ select {
 .top-52 {
 	top: 13rem;
 }
+.right-1 {
+	right: 0.25rem;
+}
 .z-0 {
 	z-index: 0;
 }
@@ -1374,8 +1377,17 @@ select {
 .h-36 {
 	height: 9rem;
 }
+.h-72 {
+	height: 18rem;
+}
+.max-h-32 {
+	max-height: 8rem;
+}
 .min-h-screen {
 	min-height: 100vh;
+}
+.min-h-full {
+	min-height: 100%;
 }
 .w-5 {
 	width: 1.25rem;
@@ -1437,6 +1449,9 @@ select {
 .w-52 {
 	width: 13rem;
 }
+.w-96 {
+	width: 24rem;
+}
 .min-w-0 {
 	min-width: 0px;
 }
@@ -1454,9 +1469,6 @@ select {
 }
 .max-w-3xl {
 	max-width: 48rem;
-}
-.max-w-md {
-	max-width: 28rem;
 }
 .max-w-5xl {
 	max-width: 64rem;
@@ -1552,6 +1564,9 @@ select {
 .items-center {
 	align-items: center;
 }
+.items-baseline {
+	align-items: baseline;
+}
 .justify-end {
 	justify-content: flex-end;
 }
@@ -1608,6 +1623,9 @@ select {
 }
 .overflow-y-hidden {
 	overflow-y: hidden;
+}
+.overflow-y-scroll {
+	overflow-y: scroll;
 }
 .truncate {
 	overflow: hidden;
@@ -1910,6 +1928,10 @@ select {
 	padding-left: 1.25rem;
 	padding-right: 1.25rem;
 }
+.py-20 {
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+}
 .px-16 {
 	padding-left: 4rem;
 	padding-right: 4rem;
@@ -1917,10 +1939,6 @@ select {
 .py-14 {
 	padding-top: 3.5rem;
 	padding-bottom: 3.5rem;
-}
-.py-20 {
-	padding-top: 5rem;
-	padding-bottom: 5rem;
 }
 .px-14 {
 	padding-left: 3.5rem;
@@ -1976,8 +1994,17 @@ select {
 .pt-16 {
 	padding-top: 4rem;
 }
+.pt-3 {
+	padding-top: 0.75rem;
+}
 .pb-5 {
 	padding-bottom: 1.25rem;
+}
+.pr-2 {
+	padding-right: 0.5rem;
+}
+.pt-7 {
+	padding-top: 1.75rem;
 }
 .text-left {
 	text-align: left;
@@ -2272,6 +2299,9 @@ select {
 }
 .ease-in {
 	transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+.hover\:z-0:hover {
+	z-index: 0;
 }
 .hover\:translate-y-2:hover {
 	--tw-translate-y: 0.5rem;
@@ -2594,6 +2624,10 @@ select {
 		width: 100%;
 	}
 
+	.sm\:w-8\/12 {
+		width: 66.666667%;
+	}
+
 	.sm\:w-9\/12 {
 		width: 75%;
 	}
@@ -2752,6 +2786,10 @@ select {
 		display: grid;
 	}
 
+	.md\:w-8\/12 {
+		width: 66.666667%;
+	}
+
 	.md\:w-2\/5 {
 		width: 40%;
 	}
@@ -2824,6 +2862,10 @@ select {
 		display: block;
 	}
 
+	.lg\:inline-block {
+		display: inline-block;
+	}
+
 	.lg\:hidden {
 		display: none;
 	}
@@ -2832,8 +2874,20 @@ select {
 		width: 24rem;
 	}
 
+	.lg\:w-8\/12 {
+		width: 66.666667%;
+	}
+
 	.lg\:w-1\/3 {
 		width: 33.333333%;
+	}
+
+	.lg\:grid-cols-3 {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.lg\:border-r-2 {
+		border-right-width: 2px;
 	}
 
 	.lg\:p-20 {
@@ -2867,6 +2921,19 @@ select {
 	.lg\:px-0 {
 		padding-left: 0px;
 		padding-right: 0px;
+	}
+
+	.lg\:px-2 {
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+	}
+
+	.lg\:pl-2 {
+		padding-left: 0.5rem;
+	}
+
+	.lg\:text-center {
+		text-align: center;
 	}
 
 	.lg\:text-5xl {

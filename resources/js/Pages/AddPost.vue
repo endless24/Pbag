@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <app-layout title="Mission">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 AddPost
@@ -17,7 +17,7 @@
                             <div class="items-center gap-4 shadow-md rounded-lg my-4 border-l-4 border-yellow-600 px-5">
                                 <div class="mb-3">
                                     <label for="" class="capitalize py-3 block">Mission Name</label>
-                                    <input type="text" required :class="inputClass" id="inputshadow" v-model="title">
+                                    <input type="text" required :class="inputClass" id="inputshadow" v-model="form.title">
                                 </div>
                                 <!-- <div class="mb-3">
                                     <label for="" class="capitalize block">Post Category</label>
@@ -27,13 +27,13 @@
                                         <!-- <option v-for="(cat, i) in categories" :key="i" :value="cat.id"> {{ cat.category }} </option>
                                     </select>
                                 </div> -->
-                                <!-- <div class="mb-3">
+                                <div class="mb-3">
                                     <label for="" class="capitalize block">Add Image</label>
-                                    <input type="file" name="picture" :class="inputClass" @change="onFileChange">
-                                </div> -->
+                                    <input type="file" name="picture" class="pt-3 px-3" @input="form.image = $event.target.files[0]" :class="inputClass" id="inputshadow">
+                                </div>
                                 <div class="mb-3">
                                     <label for="" class="capitalize block py-3">Mission Detail</label>
-                                    <textarea :class="inputClass" required class=" h-32 resize-none" id="inputshadow" v-model="content" v-on:input="check"></textarea>
+                                    <textarea :class="inputClass" required class=" h-32 resize-none" id="inputshadow" v-model="form.content" v-on:input="check"></textarea>
                                     <p :class="{help: true, 'text-red-700': remaining==0}">{{instruction}}</p>
                                 </div>
                                 <div>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="py-3 rounded-xl border grid grid-cols-4 gap-4 my-4 p-2 shadow-md" v-for="(post, i) in posts" :key="i" :value="post.id">
                                 <div class="col-span-1 overflow-hidden bg-gray-500 rounded-lg">
-                                    
+                                    <img :src="'storage/img_mission/'+ post.image " alt="" srcset="" >
                                 </div>
                                 <div class="col-span-3  text-gray-800 flex justify-between items-center w-full h-full">
                                     <div>
@@ -97,9 +97,12 @@ export default {
 
             inputClass:'border-blue-600 border-opacity-20 border-0 bg-gray-200 rounded h-12 lg:w-96 w-64',
             addBtn: 'px-2 py-2 mb-4 bg-gray-700 text-white rounded shadow-md hover:bg-blue-900',
-            title: '',
-            // image: '',
-            content: '',
+
+           form : this.$inertia.form({
+                title: '',
+                image: '',
+                content: '',
+           }),
             posts: [],
 
              limit: 200, // limiting how many letters to be entered in textarea
@@ -110,34 +113,37 @@ export default {
      // limiting how many letters to be entered in textarea
      computed: {
                 instruction: function() {  
-                return this.content==''?
+                return this.form.content==''?
                 'limit: '+this.limit+' characters':
                 'remaining '+this.remaining+' characters';      
                 },
                 remaining: function() {
-                return this.limit-this.content.length;
+                return this.limit-this.form.content.length;
              }
          },
 
     methods: {
         // limiting how many letters to be entered in textarea
         check: function() {
-            this.content = this.content.substr(0, this.limit)
+            this.content = this.form.content.substr(0, this.limit)
         },
         
         addPost(){
-            axios.post(route('api.store.post'), {title: this.title, content: this.content})
+             let data = new FormData();
+             data.append('title',this.form.title)
+             data.append('image',this.form.image)
+             data.append('content',this.form.content)
+            axios.post(route('api.store.post'), data)
             .then((response)=>{
                 if (response.data.status == 'success') {
                     alert(response.data.msg)
                 }
                 if (response.data.code == 200) {
                     alert(response.data.msg)
-                    this.title='';
-                    this.content='';
+                    this.form='';
                     this.fetchPost();
-                    // window.location.reload();
-                    this.$Inertia.visit('');
+                    window.location.reload();
+                    // this.$Inertia.visit('');
                 }
                 if(res.data.code == 500) {
                     alert(response.data.msg)

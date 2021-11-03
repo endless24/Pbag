@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Post;
 use App\Models\User;
+use Inertia\Inertia;
 use App\Models\Event;
 use App\Models\Contact;
-use App\Models\Category;
 use App\Models\Testimony;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+// use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class PostController extends Controller
 {
@@ -22,22 +22,44 @@ class PostController extends Controller
                 'msg' => 'This Post already exists',
             ]);
         } else {
-            $add = new Post;
-            // $add->img = $request->post['img'];
-            $add->title = $request->title;
-            $add->content = $request->content;
-            if ($add->save()) {
-                return response()->json([
-                    'code' => 200,
-                    'msg' => 'Mission added successfully',
-                ]);
+            $extArray = ['png', 'jpg', 'jpeg'];
+            if ($request->hasFile('image')) {
+                $image_file = $request->file('image')->getRealPath();
+                $file = $request->file('image')->getClientOriginalName();
+                $filename = pathinfo($file, PATHINFO_FILENAME);
+                $ext = pathinfo($file, PATHINFO_EXTENSION);
+                $name2store =  $filename . time() . '.' . $ext;
+                if (in_array(strtolower($ext), $extArray)) {
+                    $image = Image::make($image_file);
+                    $image->resize(600,  null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        });
+                    if ($image->save(storage_path('app/public/img_mission/' . $name2store))) {
+                        $addmission = new Post;
+                        $addmission->title = $request->title;
+                        $addmission->content = $request->content;
+                        $addmission->image = $name2store;
+                        if ($addmission->save()) {
+                            return response()->json([
+                                'code' => 200,
+                                'msg' => 'Mission added successfully',
+                            ]);
+                        } else {
+                            unlink(storage_path('app/public/img_mission/' . $name2store));
+                            return response()->json([
+                                'code' => 500,
+                                'msg' => 'An error occured!',
+                            ]);
+                        }
+                    }                
+                }else{
+                    return 'Invalid Images';
+                }
             } else {
-                return response()->json([
-                    'code' => 500,
-                    'msg' => 'An error occured!',
-                ]);
+                return 'No Image Found';
             }
         }
+           
     }
 // fetching mission post at admin side
     public function fetch_post()
@@ -100,33 +122,7 @@ class PostController extends Controller
         }
     }
 
-    // Posts Event
-    public function store_event(Request $request)
-    {
-        if (Event::where('pdate', $request->pdate)->exists()) {
-            return response()->json([
-                'status' => 'success',
-                'msg' => 'This Date already exists, please choose another date',
-            ]);
-        } else {
-            $addevent = new Event;
-            $addevent->title = $request->title;
-            $addevent->pdate = $request->pdate;
-            $addevent->content = $request->content;
-            if ($addevent->save()) {
-                return response()->json([
-                    'code' => 200,
-                    'msg' => 'Event added successfully',
-                ]);
-            } else {
-                return response()->json([
-                    'code' => 500,
-                    'msg' => 'An error occured!',
-                ]);
-            }
-        }
-    }
-
+ 
     // fetching event post at the admin side
     public function fetch_event()
     {
@@ -142,8 +138,59 @@ class PostController extends Controller
         return json_encode($postevent);
     }
 
+     // Posts Event
+     public function store_event(Request $request)
+     {
+         if (Event::where('pdate', $request->pdate)->exists()) {
+             return response()->json([
+                 'status' => 'success',
+                 'msg' => 'This Date already exists, please choose another date',
+             ]);
+         } else {
+             $extArray = ['png', 'jpg', 'jpeg'];
+             if ($request->hasFile('image')) {
+                 $image_file = $request->file('image')->getRealPath();
+                 $file = $request->file('image')->getClientOriginalName();
+                 $filename = pathinfo($file, PATHINFO_FILENAME);
+                 $ext = pathinfo($file, PATHINFO_EXTENSION);
+                 $name2store =  $filename . time() . '.' . $ext;
+                 if (in_array(strtolower($ext), $extArray)) {
+                     $image = Image::make($image_file);
+                     $image->resize(600,  null, function ($constraint) {
+                         $constraint->aspectRatio();
+                         });
+                     if ($image->save(storage_path('app/public/img_event/' . $name2store))) {
+                         $addevent = new Event;
+                         $addevent->title = $request->title;
+                         $addevent->pdate = $request->pdate;
+                         $addevent->content = $request->content;
+                         $addevent->image = $name2store;
+                         if ($addevent->save()) {
+                             return response()->json([
+                                 'code' => 200,
+                                 'msg' => 'Event added successfully',
+                             ]);
+                         } else {
+                             unlink(storage_path('app/public/img_event/' . $name2store));
+                             return response()->json([
+                                 'code' => 500,
+                                 'msg' => 'An error occured!',
+                             ]);
+                         }
+                     }                
+                 }else{
+                     return 'Invalid Images';
+                 }
+             } else {
+                 return 'No Image Found';
+             }
+         }
+             
+     }
+        // deleting event post from backend
     public function delete_event(Request $request)
     {
+        
         $delete = Event::find($request->id);
         if ($delete->delete()) {
             return response()->json([
@@ -161,23 +208,46 @@ class PostController extends Controller
     // TESTIMONY POSTS  
     public function store_testimony(Request $request)
     {
-        $testimony = new Testimony;
-        $testimony->fullname = $request->fullname;
-        $testimony->phone = $request->phone;
-        $testimony->email = $request->email;
-        $testimony->subject = $request->subject;
-        $testimony->content = $request->content;
-        if ($testimony->save()) {
-            return response()->json([
-                'status' => 'success',
-                'msg' => 'Thank You For Sharing Your Testimony'
-            ]);
+        $extArray = ['png', 'jpg', 'jpeg'];
+        if ($request->hasFile('image')) {
+            $image_file = $request->file('image')->getRealPath();
+            $file = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($file, PATHINFO_FILENAME);
+            $ext = pathinfo($file, PATHINFO_EXTENSION);
+            $name2store =  $filename . time() . '.' . $ext;
+            if (in_array(strtolower($ext), $extArray)) {
+                $image = Image::make($image_file);
+                $image->resize(600,  null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    });
+                if ($image->save(storage_path('app/public/img_testimony/' . $name2store))) {
+                    $testimony = new Testimony;
+                    $testimony->fullname = $request->fullname;
+                    $testimony->phone = $request->phone;
+                    $testimony->email = $request->email;
+                    $testimony->subject = $request->subject;
+                    $testimony->content = $request->content;
+                    $testimony->image = $name2store;
+                    if ($testimony->save()) {
+                        return response()->json([
+                            'status' => 'success',
+                            'msg' => 'Thank You For Sharing Your Testimony'
+                        ]);
+                    } else {
+                        unlink(storage_path('app/public/img_testimony/' . $name2store));
+                        return response()->json([
+                            'status' => 'error',
+                            'msg' => 'An error occured!'
+                        ]);
+                    }
+                }                
+            }else{
+                return 'Invalid Images';
+            }
         } else {
-            return response()->json([
-                'status' => 'error',
-                'msg' => 'An error occured!'
-            ]);
+            return 'No Image Found';
         }
+
     }
     // getting id of the event post you want to view it's details
     public function showpost($id)
@@ -187,18 +257,16 @@ class PostController extends Controller
         return Inertia::render('Event_details',['eventpost'=>$showpost]);
         // return json_encode($showpost);
     }
-
+    // fetching to admin dashboard
     public function fetch_testimony()
     {
         $testimony = Testimony::latest()->get();
         return json_encode($testimony);
     }
-
+    // fetch to the main page
     public function fetch_testimony_once()
     {
-        $testimonyonce = Testimony::latest()
-        ->take(3)
-        ->get();
+        $testimonyonce = Testimony::latest()->get();
         return json_encode($testimonyonce);
     }
     
@@ -244,4 +312,34 @@ class PostController extends Controller
         $contact = Contact::all();
         return json_encode($contact);
     }
+
+
+       // Posts Event
+    //    public function store_event(Request $request)
+    //    {
+    //        if (Event::where('pdate', $request->pdate)->exists()) {
+    //            return response()->json([
+    //                'status' => 'success',
+    //                'msg' => 'This Date already exists, please choose another date',
+    //            ]);
+    //        } else {
+    //            $addevent = new Event;
+    //            $addevent->title = $request->title;
+    //            $addevent->pdate = $request->pdate;
+    //            $addevent->content = $request->content;
+    //            if ($addevent->save()) {
+    //                return response()->json([
+    //                    'code' => 200,
+    //                    'msg' => 'Event added successfully',
+    //                ]);
+    //            } else {
+    //                return response()->json([
+    //                    'code' => 500,
+    //                    'msg' => 'An error occured!',
+    //                ]);
+    //            }
+    //        }
+    //    }
+   
+    
 }

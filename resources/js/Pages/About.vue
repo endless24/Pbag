@@ -1,5 +1,5 @@
 <template>
-    <web-layout>
+    <web-layout title="About">
         <!-- card about the church -->
         <div class=" bg-white rounded overflow-hidden  ">
             <div class="h-52 mx-auto max-w-7xl rounded-b overflow-hidden" :style="{'background-image':'url(images/top.jpg)', 'background-size':'cover','background-position':'right'}">
@@ -77,10 +77,10 @@
 
 <script>
 import WebLayout from '../Layouts/WebLayout.vue';
-import { usePage } from "@inertiajs/inertia-vue3";
+import { usePage,Head } from "@inertiajs/inertia-vue3";
 
 export default {
-  components: { WebLayout },
+  components: { WebLayout,Head },
   data(){
       return {
 

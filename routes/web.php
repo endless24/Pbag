@@ -47,7 +47,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
     Route::get('/add-post', [PageController::class, 'add_post'])->name('add_post');
     Route::get('/add-event', [PageController::class, 'add_event'])->name('add_event');
-    Route::get('/add-category', [PageController::class, 'add_category'])->name('add_category');
+    Route::get('/testimonys', [PageController::class, 'admin_testimonies'])->name('testimonys');
     // Route::get('/manage-post', [PageController::class, 'view_category'])->name('categories');
 });
 

@@ -7,13 +7,16 @@ import { InertiaProgress } from '@inertiajs/progress';
 // Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faBars, faBell, faEnvelope, faHome, faInfo, faKey, faLayerGroup, faLock, faMapSigns, faPen, faPhone, faPlus, faPowerOff, faPrayingHands, faRegistered, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faBell, faEnvelope, faHome, faInfo, faKey, faLayerGroup, faLock, faMapSigns, faPen, faPhone, faPlus, faPowerOff, faPrayingHands, faRegistered, faSignInAlt, faTimes, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faBuilding, faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookF, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 
-library.add( faHome, faSignInAlt,faFacebookF,faInstagram,faWhatsapp, faRegistered,faBuilding, faUser, faKey, faEnvelope, faPhone, faLock,faMapSigns, faPowerOff, faPen, faBell, faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo,)
-library.add( faHome, faSignInAlt, faRegistered, faUser, faKey, faEnvelope, faPhone, faLock, faPowerOff, faPen, faBell, faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo, faBuilding, faFacebookF, faInstagram, faWhatsapp, faMapSigns, faPrayingHands)
+library.add( faHome, faSignInAlt,faFacebookF,faInstagram,faWhatsapp, faRegistered,faBuilding, faUser, faKey, faEnvelope,
+     faPhone, faLock,faMapSigns, faPowerOff, faPen, faBell, faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo,)
+library.add( faHome, faSignInAlt, faRegistered, faUser, faKey, faEnvelope, faPhone, faLock, faPowerOff, faPen, faBell,
+     faPlus, faEdit, faLayerGroup, faTrashAlt, faBars, faInfo, faBuilding, faFacebookF, faInstagram, faWhatsapp, faMapSigns,
+      faPrayingHands, faTimes)
 
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'PolyBag';

@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <app-layout title="Event">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 AddPost
@@ -13,11 +13,11 @@
                 <h1 class="text-3xl text-yellow-600"><font-awesome :icon="['far', 'edit']" /> Create Post For Event</h1>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="md:col-span-2 ">
-                        <form name="frmPost" @submit.prevent="addPostEvent()">
+                        <form name="frmPost" @submit.prevent="addPostEvent()" enctype="multipart/form-data">
                             <div class="items-center gap-4 shadow-md rounded-lg my-4 border-l-4 border-yellow-600 px-5">
                                 <div class="mb-3">
                                     <label for="" class="capitalize block">Event Name</label>
-                                    <input type="text" :class="inputClass" id="inputshadow" v-model="title">
+                                    <input type="text" :class="inputClass" id="inputshadow" v-model="form.title" required>
                                 </div>
                                 <!-- <div class="mb-3">
                                     <label for="" class="capitalize block">Event Category</label>
@@ -29,16 +29,16 @@
                                 </div> -->
                                 <div class="mb-3">
                                     <label for="" class="capitalize block">Add Image</label>
-                                    <input type="file" name="picture" :class="inputClass" @change="onFileChange">
+                                    <input type="file" name="picture" class="pt-3 px-3" @input="form.image = $event.target.files[0]" :class="inputClass" required >
                                     <!-- <input type="text" :class="inputClass" v-model="post.image"> -->
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="capitalize block">Event Date</label>
-                                    <input type="date" placeholder="" :class="inputClass" id="inputshadow" v-model="pdate">
+                                    <input type="date" placeholder="" :class="inputClass" id="inputshadow" v-model="form.pdate" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="capitalize block">Event Detail</label>
-                                    <textarea :class="inputClass" class=" h-32 resize-none" id="inputshadow" v-model="content"></textarea>
+                                    <textarea :class="inputClass" class=" h-32 resize-none" id="inputshadow" v-model="form.content"></textarea>
                                 </div>
                                 <div>
                                     <button :class="addBtn">
@@ -60,8 +60,8 @@
                                 </div>
                             </div>
                             <div class="py-3 rounded-xl border grid grid-cols-4 gap-4 my-4 p-2 shadow-md" v-for="(event, i) in events" :key="i" :value="event.id">
-                                <div class="col-span-1 overflow-hidden bg-gray-500 rounded-lg">
-                                    
+                                <div class="col-span-1 overflow-hidden  rounded-lg  bg-cover">
+                                   <img :src="'storage/img_event/'+ event.image " alt="" srcset="" >
                                 </div>
                                 <div class="col-span-3  text-gray-800 flex justify-between items-center w-full h-full">
                                     <div>
@@ -102,28 +102,31 @@ export default {
             inputClass:'border-blue-600 border-opacity-20 border-0 bg-gray-200 rounded h-12 lg:w-96 w-64',
             addBtn: 'px-2 py-2 mb-4 bg-gray-700 text-white rounded shadow-md hover:bg-blue-900',
 
-            
-                title: '',
-                // image: '',
-                pdate: '',
-                content: '',
+             form : this.$inertia.form({
+                    title: '',
+                    image: '',
+                    pdate: '',
+                    content: '',
+                }),
             events: [],
-
         }
     },
     methods: {
         
         addPostEvent(){
-            axios.post(route('api.store.event'), {title: this.title, pdate: this.pdate ,content: this.content})
+            let data = new FormData();
+            data.append('title',this.form.title)
+            data.append('image',this.form.image)
+            data.append('pdate',this.form.pdate)
+            data.append('content',this.form.content)
+            axios.post(route('api.store.event'), data)
             .then((response)=>{
                 if (response.data.status == 'success') {
                     alert(response.data.msg)
                 }
                 if (response.data.code == 200) {
                     alert(response.data.msg)
-                    this.title='';
-                    this.pdate='';
-                    this.content='';
+                    this.form='';
                     this.fetchEvent();
                     // window.location.reload();
                     this.$Inertia.visit('');

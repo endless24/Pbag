@@ -1,8 +1,8 @@
 <template>
     <div class=" bg-gray-900  py-2 sticky top-0 w-full z-50">
         <div class="container max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3">
-                <div class=" col-span-1 text-3xl text-center">
+            <div class="grid grid-cols-1 lg:grid-cols-3">
+                <div class=" col-span-1 text-3xl lg:text-center">
                     <span class=" px-2 py-2 rounded-full cursor-pointer">
                         <span class=" bg-yellow-600 text-white px-3 py-2 text-xl rounded-full font-semibold hword"  id="hword1">
                             <i>GTC</i>
@@ -10,8 +10,12 @@
                         <i class=" text-yellow-600" ></i>
                         <span class=" text-white py-3 hword">Church</span>
                     </span>
+                     <span class="float-right text-2xl lg:hidden border-yellow-600 rounded mr-3 cursor-pointer py-1 px-2 bg-yellow-600" @click="toggleMenu = !toggleMenu">
+                        <font-awesome :icon="['fas', 'bars']" class="text-white" />
+                    </span>
                 </div>
-                <div class="col-span-2 py-2">
+               
+                <div class="col-span-2 lg:py-2 pt-7 "  :class="toggleMenu?'hidden lg:block':'block'">
                     <Link :href="route('home')" :class="navclasses" class="navbar">
                         <font-awesome :icon="['fas', 'home']" class="text-yellow-600" /> 
                         Home
@@ -48,7 +52,8 @@ export default {
     },
     data(){
         return {
-            navclasses : 'text-sm text-white px-3 hover:text-yellow-600  hover:transition duration-500 font-semibold tracking-widest uppercase'
+            toggleMenu:true,
+            navclasses : 'text-sm text-white px-3 py-3 hover:text-yellow-600  block lg:inline-block  hover:transition duration-500 font-semibold tracking-widest uppercase'
         }
     }
 }

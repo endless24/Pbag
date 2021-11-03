@@ -1,5 +1,5 @@
 <template>
-  <web-layout>
+  <web-layout title="Home">
     <!-- <template #page_head>
             <header class="bg-white text-gray-900">
                 <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 py-3">
@@ -20,45 +20,30 @@
 
     <div>
       <!-- site banner -->
-      <div
-        class="relative bg-gray-700 banner-home"
-        :style="{ 'background-image': 'url(images/prayer.jpg)' }"
-      >
-        <div
-          class="
-            absolute
-            left-4
-            md:left-20
-            text-white
-            max-w-md
-            md:max-w-2xl
-            top-52
-          "
-        >
+       <Splide :options="options" >
+          <SplideSlide class="relative bg-gray-700 banner-home" >
+            <img src="images/prayer.jpg" alt=" not found" srcset="" class=" w-full"  style="height:100vh">
+          </SplideSlide>
+           <SplideSlide  >
+            <img src="images/prayer2.jpg" alt="" srcset="" class="w-full" style="height:100vh">
+          </SplideSlide>
+          <div class=" absolute left-4 md:left-20 text-white md:max-w-2xl top-52 " >
+            <h1 class="font-bold uppercase text-xl mb-6">Our Mission</h1>
+            <h1   class="font-bold text-5xl md:text-6xl lg:text-7xl font-serif mb-6" >
+              is to glorify God and loving <i>others</i>
+            </h1>
+            <Link :href="route('about')" class=" con-btn uppercase  bg-yellow-600 text-white  font-bold  px-16  py-3 border-2 border-yellow-600  hover:bg-gray-50  hover:text-yellow-600  hover:transition duration-500  rounded  " >
+              ministry
+            </Link>
+          </div>
+        </Splide>
+      <div >
+        <div class=" absolute left-4 md:left-20 text-white md:max-w-2xl top-52 " >
           <h1 class="font-bold uppercase text-xl mb-6">Our Mission</h1>
-          <h1
-            class="font-bold text-5xl md:text-6xl lg:text-7xl font-serif mb-6"
-          >
+          <h1   class="font-bold text-5xl md:text-6xl lg:text-7xl font-serif mb-6" >
             is to glorify God and loving <i>others</i>
           </h1>
-          <Link
-            :href="route('about')"
-            class="
-              con-btn
-              uppercase
-              bg-yellow-600
-              text-white
-              font-bold
-              px-16
-              py-3
-              border-2 border-yellow-600
-              hover:bg-gray-50
-              hover:text-yellow-600
-              hover:transition
-              duration-500
-              rounded
-            "
-          >
+          <Link :href="route('about')" class=" con-btn uppercase  bg-yellow-600 text-white  font-bold  px-16  py-3 border-2 border-yellow-600  hover:bg-gray-50  hover:text-yellow-600  hover:transition duration-500  rounded  " >
             ministry
           </Link>
         </div>
@@ -129,11 +114,11 @@
             <div class="shadow_mission rounded overflow-hidden  col-span-1 mt-16" v-for="(post, i) in posts" :key="i" :value="post.id">
               <div class="bg-gray-500 mb-3">
                 <!-- <div class=" bg-gray-600 text-yellow-600 w-full h-full z-50 cover_img">Hello</div> -->
-                <img src="images/pray.jpg" alt="" class="object-cover w-full img_c" />
+                <img :src="'storage/img_mission/'+ post.image " alt="" srcset="" class=" w-full h-72">
               </div>
               <div class="px-4 pb-5">
-                <h1 class="font-bold text-gray-700 text-2xl capitalize font-serif mb-2 hover:text-yellow-600 hover:transition-all duration-500">
-                  {{ post.title }}
+                <h1 class="font-bold text-gray-700 text-2xl capitalize font-serif mb-2 text-yellow-600 hover:transition-all duration-500">
+                   {{ post.title }}
                 </h1>
                 <h1 class="font-semibold text-justify text-gray-700 text-sm font-serif">
                   {{ post.content }}
@@ -156,10 +141,9 @@
             Upcoming Events
           </h1>
           <center><hr class="border border-yellow-600 w-20 mb-6" /></center>
-
-          <div class="md:grid grid-cols-3 gap-8">
+          <div class="md:grid grid-cols-3 gap-8 ">
             <div
-              class="shadow_event rounded overflow-hidden  col-span-1 mt-16"
+              class="shadow_event rounded overflow-hidden  col-span-1 mt-16 "
               v-for="(event, i) in events"
               :key="i"
               :value="event.id"
@@ -168,21 +152,17 @@
               <Link :href="route('viewpost', event.id)">
                 <div class="bg-gray-500 mb-8">
                   <!-- <div class=" bg-gray-600 text-yellow-600 w-full h-full z-50 cover_img">Hello</div> -->
-                  <img
-                    src="images/pray1.jpg"
-                    alt=""
-                    class="object-cover w-full img_c"
-                  />
+                   <img :src="'storage/img_event/'+ event.image " alt="" srcset=""  class="object-cover w-full img_c h-72" >
               </div>
               
                 <h1
-                  class=" p-2 capitalize font-bold text-gray-800 text-xl  font-serif hover:text-yellow-600 hover:transition-all duration-500" >
+                  class=" p-2 capitalize font-bold text-gray-800 text-xl  font-serif text-yellow-600 hover:transition-all duration-500" >
                   {{ event.title }}
                 </h1>
              
                 <h1
-                  class=" p-2 font-bold  tracking-wide text-right text-yellow-600 text-sm ">
-                  {{ event.pdate }}
+                  class=" p-2 font-bold  tracking-wide text-right text-gray-700 text-sm ">
+                  <strong class="text-sm capitalize">date :</strong> {{ event.pdate }}
                 </h1>
               </Link>
             </div>
@@ -191,10 +171,7 @@
       </div>
 
       <!-- Testimomies -->
-      <div
-        class="relative bg-gray-700 banner-home"
-        :style="{ 'background-image': 'url(images/prayer12.jpg)' }"
-      >
+      <div class=" bg-gray-700 banner-test" :style="{ 'background-image': 'url(images/prayer12.jpg)' }" >
         <!-- <div class="banner-testi z-40 absolute top-0 bg-gray-900 "></div> -->
         <!-- <div class="overlay banner-home absolute top-0"></div> -->
         <div class="mx-auto max-w-5xl py-28 px-8 lg:px-0">
@@ -207,23 +184,27 @@
             People’s Stories
           </h1>
           <center><hr class="border border-yellow-600 w-20 mb-8" /></center>
+            <Splide  :options="options1">
+              <SplideSlide v-for="(testimony, i) in testimonies" :key="i" :value="testimony.id">
+              <div class="md:grid grid-cols-2 gap-8 bg-gray-900 bg-opacity-40 p-6"  >
+                <div class="col-span-1">
+                  <div class="text-white">
+                    <span class="text-2xl capitalize">{{ testimony.subject }}</span>&nbsp;
+                    
+                  </div>
 
-          <div class="md:grid grid-cols-2 gap-8 bg-gray-900 bg-opacity-40 p-6" v-for="(testimony, i) in testimonies" :key="i" :value="testimony.id">
-            <div class="col-span-1">
-              <div class="text-white">
-                <span class="text-2xl capitalize">{{ testimony.subject }}</span>&nbsp;
-                
+                  <div class="text-gray-200 mt-6 text-justify">
+                      {{ testimony.content }}
+                      <div class="text-gray-200 capitalize mt-3 font-semibold ">testifier : <span class="font-bold">{{ testimony.fullname }}</span></div>
+                  </div>
+                </div>
+                <div class="">
+                  <img :src="'storage/img_testimony/'+ testimony.image " alt="" class=" h-72 w-full img_c" />
+                </div> 
               </div>
-
-              <div class="text-gray-200 mt-6 text-justify">
-                  {{ testimony.content }}
-                  <div class="text-gray-200 capitalize mt-3 font-semibold ">testifier:-> <span class="font-bold">{{ testimony.fullname }}</span></div>
-              </div>
-            </div>
-            <div class="">
-              <img src="images/pray1.jpg" alt="" class="object-cover w-full img_c" />
-            </div>
-          </div>
+              </SplideSlide>
+            </Splide>
+            
         </div>
       </div>
     </div>
@@ -231,40 +212,47 @@
 </template>
 
 <script>
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import { defineComponent } from 'vue';
+import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 import WebLayout from "../Layouts/WebLayout.vue";
-// import Button from '../Jetstream/Button.vue';
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link, Head } from "@inertiajs/inertia-vue3";
 import axios from "axios";
 
 export default {
-  components: { WebLayout, Link },
+  components: { WebLayout, Link,Head, Splide, SplideSlide },
   data() {
     return {
-      post: {
-        title: "",
-        // image: '',
-        content: "",
-      },
       posts: [],
 
-      event: {
-        title: "",
-        pdate: "",
-        // image: '',
-        content: "",
-      },
       events: [],
 
-      testimony : {
-          fullname:'',
-          email:'',
-          phone:'',
-          subject:'',
-          content:'',
-      },
       testimonies:[],
+      // slider for welcome page
+      options: {
+        rewind:true,
+        // gap : '1rem',
+        autoplay: true,
+        rewindSpeed: 2000,
+        type:"loop",
+        arrows: false,
+        // pagination:false
+      },
+// slider for testimony
+       options1: {
+        rewind:true,
+        // gap : '1rem',
+        autoplay: true,
+        rewindSpeed: 2000,
+        type:"loop",
+        arrows: false,
+        // pagination:false
+      },
+     
     };
   },
+
+
   methods: {
     fetchPostmission() {
       axios
@@ -307,6 +295,10 @@ export default {
 </script>
 
 <style>
+.banner-test{
+   background-position: center;
+   background-size: cover;
+}
 .banner-home {
   height: 39.9rem;
   background-position: center;
@@ -333,7 +325,7 @@ export default {
   box-shadow: 4px 8px 8px hsl(0deg 10% 10% / 0.38);
 }
 
-.img_c:hover .cover_img {
-  display: block;
+.img_c{
+  background-position: center top;
 }
 </style>
